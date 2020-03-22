@@ -11,9 +11,7 @@ const cheerio = require('cheerio');
 const app = express(); 
 
 // Route for scraping the website 
-app.get('/scrape', function(req, res) {
-    // TBD
-}); 
+
 
 // Setting up our port 
 app.listen('8081'); 

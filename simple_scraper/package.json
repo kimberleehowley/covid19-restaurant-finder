@@ -6,7 +6,7 @@
     "author"       : "Scotch.io tutorial-based",
     "dependencies" : {
       "express"    : "latest",
-      "request"    : "latest",
+      "axios"    : "latest",
       "cheerio"    : "latest"
     }
   }
