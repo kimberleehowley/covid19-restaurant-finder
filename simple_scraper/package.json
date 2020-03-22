@@ -1,12 +1,14 @@
 {
-    "name"         : "node-web-scrape",
-    "version"      : "0.0.1",
-    "description"  : "Simple web scraper",
-    "main"         : "server.js",
-    "author"       : "Scotch.io tutorial-based",
-    "dependencies" : {
-      "express"    : "latest",
-      "axios"    : "latest",
-      "cheerio"    : "latest"
-    }
+  "name": "axios",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3"
   }
+}
