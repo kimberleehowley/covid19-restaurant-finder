@@ -18,7 +18,7 @@ function getRestaurants() {
 // Get all restaurants within a zip code
 async function getRestaurant(zip) {
   const data = await getRestaurants();
-  return data.Restaurants.find(restaurant => restaurant.Zip_Code == zip);
+  return data.Restaurants.filter(restaurant => restaurant.Zip_Code == zip);
 }
 
 // Export
