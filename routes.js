@@ -35,7 +35,7 @@ router.get(
       res
         .status(404)
         .json({
-          message: "No restaurants found in your zip code! Please enter another"
+          message: "No restaurants found in your zip code! Please enter another zip."
         });
     }
   })

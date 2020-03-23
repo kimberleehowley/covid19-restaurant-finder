@@ -18,7 +18,8 @@ function getRestaurants() {
 // Get all restaurants within a zip code
 async function getRestaurant(zip) {
   const data = await getRestaurants();
-  return data.Restaurants.filter(restaurant => restaurant.Zip_Code == zip);
+  return zipRestaurants = data.Restaurants.filter(restaurant => restaurant.Zip_Code == zip);
+  // Should I create a new object and .push everything there??? 
 }
 
 module.exports = {
