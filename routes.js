@@ -15,7 +15,16 @@ function asyncHandler(cb) {
   };
 }
 
+// Test 
+router.get('/', asyncHandler(async(req, res) => {
+    res.json({message: "Hello, world!"})
+})); 
+
 // Get all restaurant names 
+router.get('/restaurants', asyncHandler(async(req, res) => {
+    const restaurants = await model.getRestaurants(); 
+    res.json(restaurants);
+})); 
 
 // Get restaurants with a user input zip code 
 
