@@ -1,4 +1,4 @@
-// Interacting with the data in our restaurant_data.json file
+// Interacting with the data in our restaurant_data.json file //
 const fs = require("fs");
 
 // Return all restaurants
@@ -21,7 +21,6 @@ async function getRestaurant(zip) {
   return data.Restaurants.filter(restaurant => restaurant.Zip_Code == zip);
 }
 
-// Export
 module.exports = {
   getRestaurants,
   getRestaurant
