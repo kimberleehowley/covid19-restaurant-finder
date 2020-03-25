@@ -1,17 +1,12 @@
-// Environment variables, for security
-require("dotenv").config();
-
-// Build a basic app
 const express = require("express");
-const app = express();
-
-// Import our route definitions
 const routes = require("./routes");
 
+// Configuring the app
+const app = express();
 app.use(express.json());
 app.use("/", routes);
 
-// Throw an error when a resource is not found (custom middleware)
+// Throw an error when a resource is not found
 app.use((req, res, next) => {
   const err = new Error("Not found.");
   err.status = 404;

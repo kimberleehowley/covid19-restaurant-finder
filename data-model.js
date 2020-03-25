@@ -1,4 +1,3 @@
-// Interacting with the data in our restaurant_data.json file //
 const fs = require("fs");
 
 // Return all restaurants
@@ -18,8 +17,16 @@ function getRestaurants() {
 // Get all restaurants within a zip code
 async function getRestaurant(zip) {
   const data = await getRestaurants();
-  return zipRestaurants = data.Restaurants.filter(restaurant => restaurant.Zip_Code == zip);
-  // Should I create a new object and .push everything there??? 
+
+  // Filter through restaurants with the given zip code
+  const zipRestaurants = data.Restaurants.filter(
+    restaurant => restaurant.Zip_Code == zip
+  );
+
+  // Return the name and phone number of the restaurant
+  return zipRestaurants.map(
+    restaurant => `${restaurant.Name}: ${restaurant.Phone}`
+  );
 }
 
 module.exports = {

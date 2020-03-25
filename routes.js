@@ -1,10 +1,8 @@
-// Defining what data will be returned //
-
 const express = require("express");
 const router = express.Router();
 const model = require("./data-model");
 
-// Helper function that wraps another function in try/catch and passes errors to middleware
+// Helper function: wraps another function in try/catch and passes errors to middleware
 function asyncHandler(cb) {
   return async (req, res, next) => {
     try {
@@ -32,11 +30,9 @@ router.get(
     if (restaurants_in_zip) {
       res.json(restaurants_in_zip);
     } else {
-      res
-        .status(404)
-        .json({
-          message: "No restaurants found in your zip code! Please enter another zip."
-        });
+      res.status(404).json({
+        message: "No restaurants found in your zip code! Please enter another."
+      });
     }
   })
 );
