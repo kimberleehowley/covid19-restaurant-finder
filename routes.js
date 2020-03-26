@@ -1,6 +1,8 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const model = require("./data-model");
+const model = require('./data-model');
+const twilio = require('twilio'); 
+// const twimlGenerator = require('')
 
 // Helper function: wraps another function in try/catch and passes errors to middleware
 function asyncHandler(cb) {
@@ -36,5 +38,7 @@ router.get(
     }
   })
 );
+
+// Receive SMS via POST and send to Twilio 
 
 module.exports = router;

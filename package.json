@@ -10,7 +10,8 @@
   "author": "kimberlee-johnson",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "twilio": "^3.41.1"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
