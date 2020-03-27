@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const model = require('./data-model');
-const twilio = require('twilio'); 
+const MessagingResponse = require('twilio').twiml.MessagingResponse; 
 // const twimlGenerator = require('')
 
 // Helper function: wraps another function in try/catch and passes errors to middleware
@@ -41,12 +41,13 @@ router.get(
 
 // Receive SMS via POST and send to Twilio 
 router.post('/sms', (req, res) => {
+  const twiml = newMessagingResponse(); 
+
+  twiml.message(`Your zip code is: ${req.body.Body}`);
+
+  res.writeHead(200, {'Content-Type': 'text/xml'}); 
+  res.end(twiml.toString()); 
   res.type('text/xml');
-  res.send(`
-    <Response>
-    <Message> Restaurants are open in your zip!</Message> 
-    </Response> 
-  `);
 });
 
 module.exports = router;
