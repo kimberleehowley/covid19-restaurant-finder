@@ -47,6 +47,7 @@ router.post('/sms', (req, res) => {
   const twiml = new MessagingResponse(); 
 
   console.log(req.body.Body); 
+  console.log(req.cookies); 
 
   twiml.message(`There are restaurants open in ${req.body.Body}!`);
   twiml.message(`https://open-restaurants.herokuapp.com/restaurants/${req.body.Body}`);
