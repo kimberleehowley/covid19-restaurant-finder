@@ -40,5 +40,13 @@ router.get(
 );
 
 // Receive SMS via POST and send to Twilio 
+router.post('/sms', (request, response) => {
+  response.type('text/xml');
+  response.send(`
+    <Response>
+    <Message> Testing, 123!</Message> 
+    </Response> 
+  `);
+});
 
 module.exports = router;
