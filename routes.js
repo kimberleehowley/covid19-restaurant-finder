@@ -44,6 +44,7 @@ router.post('/sms', (req, res) => {
   const twiml = new MessagingResponse(); 
 
   twiml.message(`Your zip is ${req.body.Body}!`);
+  console.log(req.body.Body); 
 
   res.writeHead(200, {'Content-Type': 'text/xml'}); 
   res.end(twiml.toString()); 
