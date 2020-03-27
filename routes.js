@@ -41,23 +41,12 @@ router.get(
 
 // Receive SMS via POST and send to Twilio 
 router.post('/sms', (req, res) => {
-  var body = req.body.Body; 
-  res.type('text/xml');
-  const restaurants_in_zip = await.model.getRestaurant(body); 
-  if (restaurants_in_zip) {
-    res.send(`
+  response.type('text/xml');
+  response.send(`
     <Response>
-    <Message> Restaurants are open in your zip code! </Message>
-    <Message> ${JSON.strinfigy(`https://open-restaurants.herokuapp.com/restaurants/${body}`)}</Message> 
+    <Message> Restaurants are open in your zip!</Message> 
     </Response> 
   `);
-  } else {
-    res.send(`
-    <Response>
-    <Message> Please try another zip. </Message> 
-    </Response> 
-  `);
-  }
 });
 
 module.exports = router;
