@@ -1,12 +1,12 @@
 const express = require("express");
-const { urlencoded } = require('body-parser'); 
+const { urlencoded } = require("body-parser");
 const routes = require("./routes");
 
 // Configuring the app
 const app = express();
 app.use(express.json());
 app.use("/", routes);
-app.use(urlencoded({extended: false}));
+app.use(urlencoded({ extended: false }));
 
 // Throw an error when a resource is not found
 app.use((req, res, next) => {
