@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 const model = require('./data-model');
 const MessagingResponse = require('twilio').twiml.MessagingResponse; 
+const { urlencoded } = require('body-parser'); 
 // const twimlGenerator = require('')
+
+router.use(bodyParser.urlencoded({ extended: false})); 
 
 // Helper function: wraps another function in try/catch and passes errors to middleware
 function asyncHandler(cb) {
@@ -43,8 +46,9 @@ router.get(
 router.post('/sms', (req, res) => {
   const twiml = new MessagingResponse(); 
 
-  twiml.message(`Your zip is ${req.body.Body}!`);
   console.log(req.body.Body); 
+
+  twiml.message(`Your zip is ${req.body.Body}!`);
 
   res.writeHead(200, {'Content-Type': 'text/xml'}); 
   res.end(twiml.toString()); 
