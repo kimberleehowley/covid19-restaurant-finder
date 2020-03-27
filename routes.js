@@ -1,11 +1,10 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const model = require('./data-model');
-const MessagingResponse = require('twilio').twiml.MessagingResponse; 
-const bodyParser = require('body-parser'); 
-// const twimlGenerator = require('')
+const model = require("./data-model");
+const MessagingResponse = require("twilio").twiml.MessagingResponse;
+const bodyParser = require("body-parser");
 
-router.use(bodyParser.urlencoded({ extended: false})); 
+router.use(bodyParser.urlencoded({ extended: false }));
 
 // Helper function: wraps another function in try/catch and passes errors to middleware
 function asyncHandler(cb) {
@@ -42,35 +41,34 @@ router.get(
   })
 );
 
-// Receive SMS via POST and send to Twilio 
-router.post('/sms', asyncHandler(async (req, res) => {
-  const twiml = new MessagingResponse(); 
+// Receive SMS zip code, send a list back of restaurants in that zip
+router.post(
+  "/sms",
+  asyncHandler(async (req, res) => {
+    const twiml = new MessagingResponse();
 
-  const zip = req.body.Body; 
-  
-  const restaurants_in_zip = await model.getRestaurant(zip);
+    const zip = req.body.Body;
 
-  const formatted_list = restaurants_in_zip.map(restaurant => `${restaurant}\n\n`).join(''); 
-  console.log(formatted_list); 
+    const restaurants_in_zip = await model.getRestaurant(zip);
 
-  if (restaurants_in_zip) {
-    twiml.message(`There are restaurants open in ${req.body.Body}!`);
-    twiml.message(formatted_list.toString()); 
-  }
+    const formatted_list = restaurants_in_zip
+      .map(restaurant => `${restaurant}\n\n`)
+      .join("");
 
-  res.writeHead(200, {'Content-Type': 'text/xml'}); 
-  res.end(twiml.toString()); 
-}));
+    if (restaurants_in_zip) {
+      twiml.message(
+        `Thanks for eating local❣️ Here are the restaurants open in ${req.body.Body}:`
+      );
+      twiml.message(formatted_list.toString());
+    } else {
+      twiml.message(
+        `Hmmm, not seeing any open restaurants in ${req.body.Body}. Mind trying another five-digit Bay Area zip?`
+      );
+    }
+
+    res.writeHead(200, { "Content-Type": "text/xml" });
+    res.end(twiml.toString());
+  })
+);
 
 module.exports = router;
-
-  // const twiml = new MessagingResponse(); 
-
-  // console.log(req.body.Body); 
-  // console.log(req.cookies); 
-
-  // twiml.message(`There are restaurants open in ${req.body.Body}!`);
-  // twiml.message(`https://open-restaurants.herokuapp.com/restaurants/${req.body.Body}`);
-
-  // res.writeHead(200, {'Content-Type': 'text/xml'}); 
-  // res.end(twiml.toString()); 
