@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const model = require('./data-model');
 const MessagingResponse = require('twilio').twiml.MessagingResponse; 
-const { urlencoded } = require('body-parser'); 
+const bodyParser = require('body-parser'); 
 // const twimlGenerator = require('')
 
 router.use(bodyParser.urlencoded({ extended: false})); 
