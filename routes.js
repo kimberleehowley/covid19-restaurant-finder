@@ -43,7 +43,7 @@ router.get(
 router.post('/sms', (req, res) => {
   const twiml = newMessagingResponse(); 
 
-  twiml.message(`Your zip code is: ${req.body.Body}`);
+  twiml.message("Your zip!");
 
   res.writeHead(200, {'Content-Type': 'text/xml'}); 
   res.end(twiml.toString()); 
