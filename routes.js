@@ -41,8 +41,8 @@ router.get(
 
 // Receive SMS via POST and send to Twilio 
 router.post('/sms', (req, res) => {
-  response.type('text/xml');
-  response.send(`
+  res.type('text/xml');
+  res.send(`
     <Response>
     <Message> Restaurants are open in your zip!</Message> 
     </Response> 
