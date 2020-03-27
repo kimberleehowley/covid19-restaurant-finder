@@ -45,11 +45,18 @@ router.post('/sms', (req, res) => {
   res.type('text/xml');
   const restaurants_in_zip = await.model.getRestaurant(body); 
   if (restaurants_in_zip) {
-    res.json(restaurants_in_zip);
+    res.send(`
+    <Response>
+    <Message> Restaurants are open in your zip code! </Message>
+    <Message> ${JSON.strinfigy(restaurants_in_zip)}</Message> 
+    </Response> 
+  `);
   } else {
-    res.status(404).json({
-      message: "No restaurants found in your zip code! Please enter another."
-    });
+    res.send(`
+    <Response>
+    <Message> Please try another zip. </Message> 
+    </Response> 
+  `);
   }
 });
 
