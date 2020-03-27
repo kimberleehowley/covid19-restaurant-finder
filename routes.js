@@ -40,13 +40,23 @@ router.get(
 );
 
 // Receive SMS via POST and send to Twilio 
-router.post('/sms', (request, response) => {
-  response.type('text/xml');
-  response.send(`
+router.post('/sms', (req, res) => {
+  var body = req.body.Body; 
+  res.type('text/xml');
+  const restaurants_in_zip = await.model.getRestaurant(body); 
+  if (restaurants_in_zip) {
+    res.send(`
     <Response>
-    <Message> Testing, 123!</Message> 
+    <Message> Restaurants are open in your zip code!</Message> 
     </Response> 
   `);
+  } else {
+    res.send(`
+    <Response>
+    <Message> Please try another zip. </Message> 
+    </Response> 
+  `);
+  }
 });
 
 module.exports = router;
