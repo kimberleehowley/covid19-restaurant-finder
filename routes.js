@@ -46,14 +46,27 @@ router.get(
 router.post('/sms', (req, res) => {
   const twiml = new MessagingResponse(); 
 
-  console.log(req.body.Body); 
-  console.log(req.cookies); 
-
-  twiml.message(`There are restaurants open in ${req.body.Body}!`);
-  twiml.message(`https://open-restaurants.herokuapp.com/restaurants/${req.body.Body}`);
+  const zip = req.body.Body; 
+  
+  const restaurants_in_zip = await model.getRestaurant(zip);
+  if (restaurants_in_zip) {
+    twiml.message(`There are restaurants open in ${req.body.Body}!`);
+    twiml.message(restaurants_in_zip.toString()); 
+  }
 
   res.writeHead(200, {'Content-Type': 'text/xml'}); 
   res.end(twiml.toString()); 
 });
 
 module.exports = router;
+
+  // const twiml = new MessagingResponse(); 
+
+  // console.log(req.body.Body); 
+  // console.log(req.cookies); 
+
+  // twiml.message(`There are restaurants open in ${req.body.Body}!`);
+  // twiml.message(`https://open-restaurants.herokuapp.com/restaurants/${req.body.Body}`);
+
+  // res.writeHead(200, {'Content-Type': 'text/xml'}); 
+  // res.end(twiml.toString()); 
