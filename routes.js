@@ -48,7 +48,8 @@ router.post('/sms', (req, res) => {
 
   console.log(req.body.Body); 
 
-  twiml.message(`Your zip is ${req.body.Body}!`);
+  twiml.message(`There are restaurants open in ${req.body.Body}!`);
+  twiml.message(`https://open-restaurants.herokuapp.com/restaurants${req.body.Body}`);
 
   res.writeHead(200, {'Content-Type': 'text/xml'}); 
   res.end(twiml.toString()); 
