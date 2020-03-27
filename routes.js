@@ -50,7 +50,7 @@ router.post('/sms', asyncHandler(async (req, res) => {
   
   const restaurants_in_zip = await model.getRestaurant(zip);
 
-  const formatted_list = restaurants_in_zip.map(restaurant => `${restaurant}\n`); 
+  const formatted_list = restaurants_in_zip.map(restaurant => `${restaurant}\n\n`).join(''); 
   console.log(formatted_list); 
 
   if (restaurants_in_zip) {
