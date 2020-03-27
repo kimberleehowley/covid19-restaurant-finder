@@ -48,7 +48,7 @@ router.post('/sms', (req, res) => {
     res.send(`
     <Response>
     <Message> Restaurants are open in your zip code! </Message>
-    <Message> ${JSON.strinfigy(restaurants_in_zip)}</Message> 
+    <Message> ${JSON.strinfigy(`https://open-restaurants.herokuapp.com/restaurants/${body}`)}</Message> 
     </Response> 
   `);
   } else {
