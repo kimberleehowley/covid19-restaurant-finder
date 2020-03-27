@@ -49,9 +49,13 @@ router.post('/sms', asyncHandler(async (req, res) => {
   const zip = req.body.Body; 
   
   const restaurants_in_zip = await model.getRestaurant(zip);
+
+  const formatted_list = restaurants_in_zip.map(restaurant => `<li>${restaurant}</li>`); 
+  console.log(formatted_list); 
+
   if (restaurants_in_zip) {
     twiml.message(`There are restaurants open in ${req.body.Body}!`);
-    twiml.message(restaurants_in_zip.toString()); 
+    twiml.message(formatted_list.toString()); 
   }
 
   res.writeHead(200, {'Content-Type': 'text/xml'}); 
