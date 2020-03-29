@@ -1,6 +1,8 @@
 # open-restaurants
 Scraping the SF Chronicle's open restaurant list. 
 
+Deployed at: https://open-restaurants.herokuapp.com/restaurants
+
 ## Original SF Chronicle project (inspiration)
 https://projects.sfchronicle.com/2020/restaurant-delivery/ 
 
