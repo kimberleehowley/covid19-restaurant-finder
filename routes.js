@@ -35,13 +35,13 @@ router.get(
       res.json(restaurants_in_zip);
     } else {
       res.status(404).json({
-        message: "No restaurants found in your zip code! Please enter another."
+        message: "No restaurants found in your zip code! Please enter another.",
       });
     }
   })
 );
 
-// Receive SMS zip code, send a list back of restaurants in that zip
+// Receive a zip code, and return a list of restaurants
 router.post(
   "/sms",
   asyncHandler(async (req, res) => {
@@ -51,12 +51,8 @@ router.post(
 
     const restaurants_in_zip = await model.getRestaurant(zip);
 
-    if (!restaurants_in_zip) {
-      twiml.message(`Hmmm, not seeing any open restaurants in ${req.body.Body}. Mind trying another five-digit Bay Area zip?`); 
-    }
-
     const formatted_list = restaurants_in_zip
-      .map(restaurant => `${restaurant}\n\n`)
+      .map((restaurant) => `${restaurant}\n\n`)
       .join("");
 
     if (restaurants_in_zip) {
@@ -64,11 +60,24 @@ router.post(
         `Thanks for eating local❣️ Here are the restaurants open in ${req.body.Body}:`
       );
       twiml.message(formatted_list.toString());
-    } else {
-      twiml.message(
-        `Hmmm, not seeing any open restaurants in ${req.body.Body}. Mind trying another five-digit Bay Area zip?`
-      );
     }
+
+    res.writeHead(200, { "Content-Type": "text/xml" });
+    res.end(twiml.toString());
+  })
+);
+
+// Error route, for when a user enters in an invalid zip
+router.post(
+  "/error",
+  asyncHandler(async (req, res) => {
+    const twiml = new MessagingResponse();
+
+    const text = req.body.Body;
+
+    twiml.message(
+      `Hmmm, not seeing any open restaurants in ${text}. Mind trying another five-digit Bay Area zip?`
+    );
 
     res.writeHead(200, { "Content-Type": "text/xml" });
     res.end(twiml.toString());
