@@ -51,6 +51,10 @@ router.post(
 
     const restaurants_in_zip = await model.getRestaurant(zip);
 
+    if (!restaurants_in_zip) {
+      twiml.message(`Hmmm, not seeing any open restaurants in ${req.body.Body}. Mind trying another five-digit Bay Area zip?`); 
+    }
+
     const formatted_list = restaurants_in_zip
       .map(restaurant => `${restaurant}\n\n`)
       .join("");
