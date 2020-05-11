@@ -60,7 +60,7 @@ router.post(
         `Thanks for eating local❣️ Here are the restaurants open in ${req.body.Body}:`
       );
       twiml.message(formatted_list.toString());
-    } else if (!restaurants_in_zip) {
+    } else {
       twiml.message(
         `Hmmm, not seeing any open restaurants in ${req.body.Body}. Mind trying another five-digit Bay Area zip?`
       );
