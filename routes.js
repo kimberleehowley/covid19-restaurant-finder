@@ -58,10 +58,12 @@ router.post(
     } 
 
     // Otherwise, send back the list 
-    twiml.message(
-      `Thanks for eating local❣️ Here are the restaurants open in ${req.body.Body}:`
-    );
-    twiml.message(restaurants_in_zip.toString());
+    else if (restaurants_in_zip !== 1) {
+      twiml.message(
+        `Thanks for eating local❣️ Here are the restaurants open in ${req.body.Body}:`
+      );
+      twiml.message(restaurants_in_zip.toString());
+    }
 
     res.writeHead(200, { "Content-Type": "text/xml" });
     res.end(twiml.toString());
