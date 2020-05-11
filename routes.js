@@ -73,10 +73,8 @@ router.post(
   asyncHandler(async (req, res) => {
     const twiml = new MessagingResponse();
 
-    const text = req.body.Body;
-
     twiml.message(
-      `Hmmm, not seeing any open restaurants in ${text}. Mind trying another five-digit Bay Area zip?`
+      `Hmmm, not seeing any open restaurants near you. Mind trying another five-digit Bay Area zip?`
     );
 
     res.writeHead(200, { "Content-Type": "text/xml" });
