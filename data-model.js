@@ -19,7 +19,7 @@ async function getRestaurant(zip) {
   const data = await getRestaurants();
 
   // If the zip (what the user texted) doesn't include the start of a Bay Area zip
-  if (zip.slice(0, 2) !== "94" || zip.slice(0, 2) !== "95") {
+  if (zip !== 94117) {
     // Return 1
     return 1;
   } else {
