@@ -20,16 +20,23 @@ async function getRestaurant(zip) {
 
   // Filter through restaurants with the given zip code
   const zipRestaurants = data.Restaurants.filter(
-    restaurant => restaurant.Zip_Code == zip
+    (restaurant) => restaurant.Zip_Code == zip
   );
 
-  // Return the name and phone number of the restaurant
-  return zipRestaurants.map(
-    restaurant => `${restaurant.Name}: ${restaurant.Phone}`
-  );
+  // Check if the user texted something invalid here
+  if (!zipRestaurants) {
+    errorMessage =
+      "Hmmm, not seeing any restaurants open near that zip. Mind trying another five-digit Bay Area zip?";
+    return errorMessage;
+  } else {
+    // Return the name and phone number of the restaurant
+    return zipRestaurants.map(
+      (restaurant) => `${restaurant.Name}: ${restaurant.Phone}\n\n`
+    );
+  }
 }
 
 module.exports = {
   getRestaurants,
-  getRestaurant
+  getRestaurant,
 };

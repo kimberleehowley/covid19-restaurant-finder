@@ -51,15 +51,17 @@ router.post(
 
     const restaurants_in_zip = await model.getRestaurant(zip);
 
-    const formatted_list = restaurants_in_zip
-      .map((restaurant) => `${restaurant}\n\n`)
-      .join("");
+    // const formatted_list = restaurants_in_zip
+    //   .map((restaurant) => `${restaurant}\n\n`)
+    //   .join("");
 
-    if (restaurants_in_zip) {
+    if (restaurants_in_zip == errorMessage) {
+      twiml.message("Error!");
+    } else {
       twiml.message(
         `Thanks for eating local❣️ Here are the restaurants open in ${req.body.Body}:`
       );
-      twiml.message(formatted_list.toString());
+      twiml.message(restaurants_in_zip.toString());
     }
 
     res.writeHead(200, { "Content-Type": "text/xml" });
