@@ -22,17 +22,17 @@ async function getRestaurant(zip) {
   if (zip.slice(0, 2) !== "94" || zip.slice(0, 2) !== "95") {
     // Return 1
     return 1;
+  } else {
+    // Otherwise, filter through all restaurants, finding ones with given zip
+    const zipRestaurants = data.Restaurants.filter(
+      (restaurant) => restaurant.Zip_Code == zip
+    );
+
+    // And return the name and phone number of each
+    return zipRestaurants.map(
+      (restaurant) => `${restaurant.Name}: ${restaurant.Phone}\n\n`
+    );
   }
-
-  // Otherwise, filter through all restaurants, finding ones with given zip
-  const zipRestaurants = data.Restaurants.filter(
-    (restaurant) => restaurant.Zip_Code == zip
-  );
-
-  // And return the name and phone number of each
-  return zipRestaurants.map(
-    (restaurant) => `${restaurant.Name}: ${restaurant.Phone}\n\n`
-  );
 }
 
 module.exports = {
