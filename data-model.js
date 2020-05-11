@@ -18,22 +18,21 @@ function getRestaurants() {
 async function getRestaurant(zip) {
   const data = await getRestaurants();
 
-  // Filter through restaurants with the given zip code
+  // If the zip (what the user texted) doesn't include the start of a Bay Area zip
+  if (zip.slice(0, 2) !== "94" || zip.slice(0, 2) !== "95") {
+    // Return 1
+    return 1;
+  }
+
+  // Otherwise, filter through all restaurants, finding ones with given zip
   const zipRestaurants = data.Restaurants.filter(
     (restaurant) => restaurant.Zip_Code == zip
   );
 
-  // Check if the user texted something invalid here
-  if (!zipRestaurants) {
-    errorMessage =
-      "Hmmm, not seeing any restaurants open near that zip. Mind trying another five-digit Bay Area zip?";
-    return errorMessage;
-  } else {
-    // Return the name and phone number of the restaurant
-    return zipRestaurants.map(
-      (restaurant) => `${restaurant.Name}: ${restaurant.Phone}\n\n`
-    );
-  }
+  // And return the name and phone number of each
+  return zipRestaurants.map(
+    (restaurant) => `${restaurant.Name}: ${restaurant.Phone}\n\n`
+  );
 }
 
 module.exports = {

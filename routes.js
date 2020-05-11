@@ -48,36 +48,20 @@ router.post(
     const twiml = new MessagingResponse();
 
     const zip = req.body.Body;
-
     const restaurants_in_zip = await model.getRestaurant(zip);
 
-    // const formatted_list = restaurants_in_zip
-    //   .map((restaurant) => `${restaurant}\n\n`)
-    //   .join("");
+    // If the model returns 1, meaning the body was not a Bay Area zip 
+    // Send an error text 
+    if (restaurants_in_zip === 1) {
+      twiml.message(`Hmmm, I'm not finding any restaurants open in ${req.body.Body}`);
+      twiml.message(`Could you please try another five-digit Bay Area zip code?`);
+    } 
 
-    if (restaurants_in_zip == errorMessage) {
-      twiml.message("Error!");
-    } else {
-      twiml.message(
-        `Thanks for eating local❣️ Here are the restaurants open in ${req.body.Body}:`
-      );
-      twiml.message(restaurants_in_zip.toString());
-    }
-
-    res.writeHead(200, { "Content-Type": "text/xml" });
-    res.end(twiml.toString());
-  })
-);
-
-// Error route, for when a user enters in an invalid zip
-router.post(
-  "/error",
-  asyncHandler(async (req, res) => {
-    const twiml = new MessagingResponse();
-
+    // Otherwise, send back the list 
     twiml.message(
-      `Hmmm, not seeing any open restaurants near you. Mind trying another five-digit Bay Area zip?`
+      `Thanks for eating local❣️ Here are the restaurants open in ${req.body.Body}:`
     );
+    twiml.message(restaurants_in_zip.toString());
 
     res.writeHead(200, { "Content-Type": "text/xml" });
     res.end(twiml.toString());
