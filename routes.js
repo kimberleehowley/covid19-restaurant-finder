@@ -50,9 +50,14 @@ router.post(
     // Store the user's text as a variable 
     const zip = req.body.Body;
 
+    // Convert to string for the check 
+    const zipString = zip.toString(); 
+    // Get first two numbers
+    const zipStart = zipString.slice(0,2); 
+
     // Check if the first two digits do NOT include 94 or 95
     // Because if they don't, that's not a Bay Area zip, and you need to send an error 
-    if (zip == 94117) {
+    if ((zipStart !== '94') || (zipStart !== '95')) {
       twiml.message(`Hmmm, I'm not finding any restaurants open in ${req.body.Body}`);
       twiml.message(`Could you please try another five-digit Bay Area zip code?`);
     }
