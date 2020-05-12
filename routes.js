@@ -52,7 +52,7 @@ router.post(
 
     // Check if the first two digits do NOT include 94 or 95
     // Because if they don't, that's not a Bay Area zip, and you need to send an error 
-    if (zip.slice(0, 2) !== '94' || zip.slice(0,2) !== '95') {
+    if (zip.toString().slice(0, 2) !== '94' || zip.toString.slice(0,2) !== '95') {
       twiml.message(`Hmmm, I'm not finding any restaurants open in ${req.body.Body}`);
       twiml.message(`Could you please try another five-digit Bay Area zip code?`);
     }
