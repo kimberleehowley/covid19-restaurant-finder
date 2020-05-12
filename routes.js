@@ -53,17 +53,19 @@ router.post(
     // Load zip codes 
     const validZips = await model.getZips(); 
 
-    // Check if zip in list of valids 
+    // If the zip is not in our valid zip codes list, return an error 
     if (!validZips.includes(zip)) {
       twiml.message(`Hmmm, I'm not finding any restaurants open in ${req.body.Body}`);
       twiml.message(`Could you please try another five-digit Bay Area zip code?`);
     }
 
+    // But if it is, return the list of restaurants 
     else {
       const restaurants_in_zip = await model.getRestaurant(zip);
       twiml.message(
         `Thanks for eating local❣️ Here are the restaurants open in ${req.body.Body}:`
       );
+      // Join the restaurants with an empty space to get rid of the commas 
       twiml.message(restaurants_in_zip.join("").toString());
 
     }
