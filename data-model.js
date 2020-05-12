@@ -15,7 +15,7 @@ function getRestaurants() {
 }
 
 // Return all zip codes 
-function getZips() {
+async function getZips() {
   const data = await getRestaurants();
   return data.Restaurants.map((restaurant) => `${restaurant.Zip_Code}`);
 }
@@ -24,15 +24,15 @@ function getZips() {
 async function getRestaurant(zip) {
   const data = await getRestaurants();
 
-  // Filter through the data looking for restaurants with a given zip 
+  // Otherwise, filter through all restaurants, finding ones with given zip
   const zipRestaurants = data.Restaurants.filter(
     (restaurant) => restaurant.Zip_Code == zip
   );
 
   // And return the name and phone number of each
-  // Add a join to get rid of the commas 
   return zipRestaurants.map(
-    restaurant => `${restaurant.Name}: ${restaurant.Phone}`);
+    (restaurant) => `${restaurant.Name}: ${restaurant.Phone}\n\n`
+  );
 }
 
 module.exports = {
