@@ -14,6 +14,12 @@ function getRestaurants() {
   });
 }
 
+// Return all zip codes 
+async function getZips() {
+  const data = await getRestaurants();
+  return data.Restaurants.map((restaurant) => `${restaurant.Zip}`);
+}
+
 // Get all restaurants within a zip code
 async function getRestaurant(zip) {
   const data = await getRestaurants();
@@ -31,5 +37,6 @@ async function getRestaurant(zip) {
 
 module.exports = {
   getRestaurants,
-  getRestaurant,
+  getZips, 
+  getRestaurant
 };
