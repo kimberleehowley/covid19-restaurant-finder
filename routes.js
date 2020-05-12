@@ -6,6 +6,9 @@ const bodyParser = require("body-parser");
 
 router.use(bodyParser.urlencoded({ extended: false }));
 
+// Load zip codes as a constant 
+const validZips = await model.getZips(); 
+
 // Helper function: wraps another function in try/catch and passes errors to middleware
 function asyncHandler(cb) {
   return async (req, res, next) => {
@@ -17,7 +20,7 @@ function asyncHandler(cb) {
   };
 }
 
-// Get all restaurant names
+// Display all restaurant names 
 router.get(
   "/restaurants",
   asyncHandler(async (req, res) => {
@@ -26,7 +29,7 @@ router.get(
   })
 );
 
-// Get all restaurants in a zip code
+// Display all restaurants in a zip code 
 router.get(
   "/restaurants/:zip",
   asyncHandler(async (req, res) => {
@@ -41,25 +44,24 @@ router.get(
   })
 );
 
-// Receive a zip code, and return a list of restaurants
+// Receive a zip code, and create a new message based on that zip 
 router.post(
   "/sms",
   asyncHandler(async (req, res) => {
     const twiml = new MessagingResponse();
 
-    // Store the user's text as a variable 
+    // Store whatever is sent to the POST request as a variable 
+    // Variable named 'zip' here, because user ideally texting a zip 
     const zip = req.body.Body;
 
-    // Load zip codes 
-    const validZips = await model.getZips(); 
-
-    // Check if zip in list of valids 
+    // But, if the zip isn't in our list
     if (!validZips.includes(zip)) {
+      // Send an error message 
       twiml.message(`Hmmm, I'm not finding any restaurants open in ${req.body.Body}`);
       twiml.message(`Could you please try another five-digit Bay Area zip code?`);
-    }
-
-    else {
+      // But if it is in our list
+    } else {
+      // Load the restaurants for that zip code 
       const restaurants_in_zip = await model.getRestaurant(zip);
       twiml.message(
         `Thanks for eating local❣️ Here are the restaurants open in ${req.body.Body}:`

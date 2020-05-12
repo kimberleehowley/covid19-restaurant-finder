@@ -24,15 +24,16 @@ async function getZips() {
 async function getRestaurant(zip) {
   const data = await getRestaurants();
 
-  // Otherwise, filter through all restaurants, finding ones with given zip
+  // Filter through the data looking for restaurants with a given zip 
   const zipRestaurants = data.Restaurants.filter(
     (restaurant) => restaurant.Zip_Code == zip
   );
 
   // And return the name and phone number of each
+  // Add a join to get rid of the commas 
   return zipRestaurants.map(
     (restaurant) => `${restaurant.Name}: ${restaurant.Phone}\n\n`
-  );
+  ).join("");
 }
 
 module.exports = {
