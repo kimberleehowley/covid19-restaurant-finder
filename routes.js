@@ -47,22 +47,23 @@ router.post(
   asyncHandler(async (req, res) => {
     const twiml = new MessagingResponse();
 
+    // Store the user's text as a variable 
     const zip = req.body.Body;
-    const restaurants_in_zip = await model.getRestaurant(zip);
 
-    // If the model returns 1, meaning the body was not a Bay Area zip 
-    // Send an error text 
-    if (restaurants_in_zip === 1) {
+    // Check if the first two digits do NOT include 94 or 95
+    // Because if they don't, that's not a Bay Area zip, and you need to send an error 
+    if (zip.slice(0, 2) !== '94' || zip.slice(0,2) !== '95') {
       twiml.message(`Hmmm, I'm not finding any restaurants open in ${req.body.Body}`);
       twiml.message(`Could you please try another five-digit Bay Area zip code?`);
-    } 
+    }
 
-    // Otherwise, send back the list 
-    else if (restaurants_in_zip !== 1) {
+    else {
+      const restaurants_in_zip = await model.getRestaurant(zip);
       twiml.message(
         `Thanks for eating local❣️ Here are the restaurants open in ${req.body.Body}:`
       );
       twiml.message(restaurants_in_zip.toString());
+
     }
 
     res.writeHead(200, { "Content-Type": "text/xml" });
