@@ -64,7 +64,7 @@ router.post(
       twiml.message(
         `Thanks for eating local❣️ Here are the restaurants open in ${req.body.Body}:`
       );
-      twiml.message(restaurants_in_zip.toString());
+      twiml.message(restaurants_in_zip.join("").toString());
 
     }
 
