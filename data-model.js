@@ -32,8 +32,7 @@ async function getRestaurant(zip) {
   // And return the name and phone number of each
   // Add a join to get rid of the commas 
   return zipRestaurants.map(
-    (restaurant) => `${restaurant.Name}: ${restaurant.Phone}\n\n`
-  ).join("");
+    (restaurant) => `${restaurant.Name}: ${restaurant.Phone});
 }
 
 module.exports = {
