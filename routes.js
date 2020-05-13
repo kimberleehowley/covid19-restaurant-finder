@@ -30,7 +30,7 @@ router.get(
 router.get(
   "/restaurants/:zip",
   asyncHandler(async (req, res) => {
-    const restaurants_in_zip = await model.getRestaurant(req.params.zip);
+    const restaurants_in_zip = await model.getZipRestaurants(req.params.zip);
     if (restaurants_in_zip) {
       res.json(restaurants_in_zip);
     } else {
@@ -47,7 +47,7 @@ router.post(
   asyncHandler(async (req, res) => {
     const twiml = new MessagingResponse();
 
-    // Store the user's text as a variable 
+    // Store the body of the user's text as a variable 
     const zip = req.body.Body;
 
     // Load zip codes 
@@ -61,13 +61,12 @@ router.post(
 
     // But if it is, return the list of restaurants 
     else {
-      const restaurants_in_zip = await model.getRestaurant(zip);
+      const restaurants_in_zip = await model.getZipRestaurants(zip);
       twiml.message(
         `Thanks for eating local❣️ Here are the restaurants open in ${req.body.Body}:`
       );
-      // Join the restaurants with an empty space to get rid of the commas 
+      // Formatting: remove the commas in the returned array with an empty space 
       twiml.message(restaurants_in_zip.join("").toString());
-
     }
 
     res.writeHead(200, { "Content-Type": "text/xml" });
