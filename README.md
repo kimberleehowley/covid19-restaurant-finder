@@ -4,6 +4,10 @@ Scraping the SF Chronicle's open restaurant list.
 Deployed at: https://open-restaurants.herokuapp.com/restaurants
 
 ## How it works 
+A user texts our Twilio Phone Number a five-digit zip code. Our Twilio Phone Number sends an HTTP request including the zip code to a Node.js API deployed on Heroku. The API receives the zip code, looks up the relevant restaurants, and sends a formatted list of them back to the user’s phone number via a POST request. 
+
+To set it all up, you’ll want to have [Twilio](www.twilio.com/referral/avaKmb), [Heroku](https://signup.heroku.com/), and [Github](https://github.com/join) accounts ready. 
+
 
 ## Original SF Chronicle project (inspiration)
 https://projects.sfchronicle.com/2020/restaurant-delivery/ 
