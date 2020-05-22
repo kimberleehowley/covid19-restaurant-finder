@@ -6,7 +6,6 @@ Deployed on [Heroku](https://open-restaurants.herokuapp.com/restaurants) at: `ht
 If you're interested in how and why this was built, or in building a clone for your area, you can read more on [Dev.to](https://dev.to/kimberleejohnson/build-a-twilio-app-to-help-people-support-local-restaurants-during-covid-19-14k5). 
 
 ## Endpoints 
-### User Routes
 | Method | Endpoint       | Access Control | Description                                          |
 | ------ | -------------  | -------------- | ---------------------------------------------------- |
 | GET    | `/restaurants` | public         | Returns a list of all SF Chronicle-listed restaurants open during shelter in place.|
@@ -16,10 +15,14 @@ If you're interested in how and why this was built, or in building a clone for y
 ## Usage 
 ### From the command line 
 Example request for restaurants in the 94117 zip: 
-`curl -H "Accept: application/json" "https://open-restaurants.herokuapp.com/restaurants/94117"`
+```
+curl -H "Accept: application/json" "https://open-restaurants.herokuapp.com/restaurants/94117"
+```
 
 Example response: 
-`["1428 Haight Patio Cafe: 415-864-8484\n\n","4505 Burgers & BBQ: 415-231-6993\n\n","Bean Bag Cafe: 415-563-3634\n\n","Berliner Berliner: 415-795-1457\n\n","Bob's on Baker: 415-815-2534\n\n","Che Fico Alimentari: 415-416-6980\n\n","CreoLa: 415-260-3143\n\n","Escape From New York Pizza: 415-668-5577\n\n","Jannah Restaurant: 415-5674400\n\n","Maven: 415-829-7982\n\n","Memphis Minnie's: 415-864-7675\n\n","Namu Stonepot: 415-926-8065\n\n","Nopa: 415-864-8643\n\n","Nopalito: 415-300-0029\n\n","StreetTaco: 415-525-4435\n\n","The Little Chihuahua: 415-255-8225\n\n","The Mill: 415-345-1953\n\n","Zazie: 415-564-5332\n\n"]`
+```json
+["1428 Haight Patio Cafe: 415-864-8484\n\n","4505 Burgers & BBQ: 415-231-6993\n\n","Bean Bag Cafe: 415-563-3634\n\n","Berliner Berliner: 415-795-1457\n\n","Bob's on Baker: 415-815-2534\n\n","Che Fico Alimentari: 415-416-6980\n\n","CreoLa: 415-260-3143\n\n","Escape From New York Pizza: 415-668-5577\n\n","Jannah Restaurant: 415-5674400\n\n","Maven: 415-829-7982\n\n","Memphis Minnie's: 415-864-7675\n\n","Namu Stonepot: 415-926-8065\n\n","Nopa: 415-864-8643\n\n","Nopalito: 415-300-0029\n\n","StreetTaco: 415-525-4435\n\n","The Little Chihuahua: 415-255-8225\n\n","The Mill: 415-345-1953\n\n","Zazie: 415-564-5332\n\n"]
+```
 
 ### Running the server locally 
 1. Fork and clone this respository. 
