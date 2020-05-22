@@ -15,6 +15,7 @@
     "twilio": "^3.41.1"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "weallbehave": "^1.2.0"
   }
 }
