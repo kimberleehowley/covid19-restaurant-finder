@@ -42,7 +42,7 @@ Here are some ideas to get you started:
 Ping [@kimeejohnson](https://twitter.com/kimeejohnson) on Twitter if you have any questions about getting involved. 
 
 ## Code of Conduct 
-We want to make sure you're comfortable contributing, and we take or Code of Conduct seriously. Have a look at our full text and reporting instructions. 
+We want to make sure you're comfortable contributing, and we take or Code of Conduct seriously. Have a look at our full [text and reporting instructions](https://github.com/kimberleejohnson/open-restaurants/blob/master/CODE_OF_CONDUCT.md). 
 
 ## License 
 [MIT](https://choosealicense.com/licenses/mit/)
