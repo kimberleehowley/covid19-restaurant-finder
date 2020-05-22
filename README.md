@@ -29,7 +29,10 @@ Example response:
 2. From your terminal, cd into the cloned repository. 
 3. Run `npm install` from the directory.  
 4. Run `npm start`. 
-5. Check that you see this message in your terminal: ``SF Chronicle restaurant data listening on: http://localhost:${port}! `. 
+5. Check that you see this message in your terminal: 
+```
+SF Chronicle restaurant data listening on: http://localhost:${your port here}!
+``` 
 6. Then, you can visit any of the routes you like via the `localhost` url. 
 
 ## Contributing 
