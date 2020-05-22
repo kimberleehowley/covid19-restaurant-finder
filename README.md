@@ -1,7 +1,7 @@
 # COVID-19 Bay Area Open Restaurant Finder 
 An API that returns data from the San Francisco Chronicle's [directory](https://projects.sfchronicle.com/2020/restaurant-delivery/) of Bay Area restaurants open for delivery and takeout during Shelter in Place.
 
-Deployed on [Heroku](https://open-restaurants.herokuapp.com/restaurants) at: `https://open-restaurants.herokuapp.com/restaurants`.
+Deployed on [Heroku](https://open-restaurants.herokuapp.com/) at: `https://open-restaurants.herokuapp.com/`.
 
 If you're interested in how and why this was built, or in building a clone for your area, you can read more on [Dev.to](https://dev.to/kimberleejohnson/build-a-twilio-app-to-help-people-support-local-restaurants-during-covid-19-14k5). 
 
