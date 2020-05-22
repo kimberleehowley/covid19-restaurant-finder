@@ -17,6 +17,15 @@ function asyncHandler(cb) {
   };
 }
 
+// Greeting
+router.get(
+  "/",
+  asyncHandler(async (req, res) => {
+    const restaurants = await model.getRestaurants();
+    res.json({message: "Welcome! Add /restaurants to the end of this url to see Bay Area restaurants. A zip after that will show you some by zip."});
+  })
+);
+
 // Get all restaurant names
 router.get(
   "/restaurants",
